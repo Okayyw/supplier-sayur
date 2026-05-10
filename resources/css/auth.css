@@ -1,0 +1,173 @@
+/* ─── AUTH GLOBAL ────────────────────────────────────── */
+body.auth-page {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+body.auth-page.admin {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+}
+
+/* ─── LOGIN PAGES (Customer/Admin) ───────────────────── */
+.wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 900px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 8px 40px rgba(0,0,0,.1);
+    overflow: hidden;
+    min-height: 520px;
+}
+.left-panel {
+    flex: 1;
+    background: linear-gradient(160deg, #16a34a 0%, #22c55e 60%, #4ade80 100%);
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
+}
+.admin .left-panel {
+    background: linear-gradient(160deg, #0f172a 0%, #1e293b 60%, #334155 100%);
+}
+.left-panel .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+.left-panel .brand-icon {
+    width: 48px; height: 48px;
+    background: rgba(255,255,255,.25);
+    border-radius: 14px;
+    display: grid; place-items: center;
+    font-size: 24px;
+}
+.left-panel .brand-name { font-size: 18px; font-weight: 700; }
+.left-panel .brand-sub  { font-size: 12px; opacity: .8; }
+.left-panel h2 { font-size: 26px; font-weight: 800; margin-bottom: 12px; line-height: 1.3; }
+.left-panel p  { font-size: 13.5px; opacity: .85; line-height: 1.7; margin-bottom: 32px; }
+.feature-list  { list-style: none; }
+.feature-list li {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; margin-bottom: 10px; opacity: .9;
+}
+.feature-list li span.check {
+    width: 20px; height: 20px;
+    background: rgba(255,255,255,.3);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 11px; flex-shrink: 0;
+}
+.admin-link { margin-top: auto; padding-top: 32px; font-size: 12.5px; opacity: .8; }
+.admin-link a { color: #fff; font-weight: 700; text-decoration: underline; }
+
+.right-panel {
+    width: 380px;
+    padding: 48px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.right-panel h1 { font-size: 22px; font-weight: 800; color: var(--gray-900); margin-bottom: 4px; }
+.right-panel .subtitle { font-size: 13px; color: var(--gray-500); margin-bottom: 28px; }
+.demo-box {
+    background: #eff6ff; border: 1px solid #bfdbfe;
+    border-radius: 8px; padding: 10px 14px;
+    margin-bottom: 22px; font-size: 12px; color: #1d4ed8;
+}
+.demo-box strong { display: block; margin-bottom: 2px; }
+.input-wrap { position: relative; }
+.input-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); font-size: 14px; color: var(--gray-400); }
+.right-panel .form-control { padding: 10px 12px 10px 34px; }
+.form-bottom { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.form-bottom label { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--gray-700); cursor: pointer; }
+
+/* ─── REGISTER PAGE ──────────────────────────────────── */
+.register-body {
+    background: #f0fdf4;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.auth-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,.08);
+    width: 100%;
+    max-width: 480px;
+    padding: 32px;
+}
+.auth-logo { text-align: center; margin-bottom: 24px; }
+.auth-logo-icon {
+    width: 50px; height: 50px;
+    background: var(--green);
+    border-radius: 14px;
+    display: inline-grid; place-items: center;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.auth-logo h1 { font-size: 19px; font-weight: 700; color: var(--gray-900); }
+.auth-logo p  { font-size: 12.5px; color: var(--gray-500); margin-top: 2px; }
+
+/* ─── SHARED AUTH COMPONENTS ─────────────────────────── */
+.admin-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #1e293b;
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+}
+.admin .form-control:focus { border-color: #1e293b; background: #fff; }
+.security-note {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    color: var(--gray-400);
+    text-align: center;
+    justify-content: center;
+}
+.btn-submit {
+    width: 100%;
+    padding: 11px;
+    background: var(--green-dark);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background .15s;
+    margin-bottom: 16px;
+}
+.btn-submit:hover { background: #15803d; }
+.btn-submit.dark { background: var(--gray-900); }
+.btn-submit.dark:hover { background: #1f2937; }
+
+.auth-footer { text-align: center; font-size: 12.5px; color: var(--gray-500); }
+.link-green { color: var(--green-dark); font-size: 12.5px; text-decoration: none; font-weight: 600; }
+.link-green:hover { text-decoration: underline; }
+
+@media (max-width: 680px) {
+    .wrapper { flex-direction: column; }
+    .left-panel { padding: 28px 24px; }
+    .left-panel h2 { font-size: 20px; }
+    .right-panel { width: 100%; padding: 28px 24px; }
+}
+@media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
