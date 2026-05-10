@@ -10,7 +10,7 @@
 <div class="card" style="max-width:600px;">
     <div class="card-header"><h2>✏️ Edit: {{ $produk->emoji }} {{ $produk->nama }}</h2></div>
     <div class="card-body">
-        <form method="POST" action="{{ route('admin.produk.update', $produk) }}">
+        <form method="POST" action="{{ route('admin.produk.update', $produk) }}" enctype="multipart/form-data">
             @csrf @method('PATCH')
             <div class="form-row">
                 <div class="form-group">
@@ -20,10 +20,24 @@
                     @error('nama')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Emoji</label>
+                    <label class="form-label">Emoji (Cadangan)</label>
                     <input type="text" name="emoji" value="{{ old('emoji', $produk->emoji) }}"
                         class="form-control">
                 </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Gambar Produk (Real)</label>
+                @if($produk->gambar)
+                    <div style="margin-bottom: 8px;">
+                        <img src="{{ asset('storage/' . $produk->gambar) }}" alt="{{ $produk->nama }}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid var(--gray-200);">
+                    </div>
+                @endif
+                <input type="file" name="gambar" 
+                    class="form-control {{ $errors->has('gambar') ? 'is-invalid' : '' }}"
+                    accept="image/*">
+                <small style="color:var(--gray-500);">Biarkan kosong jika tidak ingin mengubah gambar.</small>
+                @error('gambar')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
 
             <div class="form-group">

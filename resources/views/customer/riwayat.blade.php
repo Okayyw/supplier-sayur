@@ -3,26 +3,7 @@
 @section('page-title', 'Riwayat')
 
 @push('styles')
-<style>
-.pesanan-card{background:#fff;border:1px solid var(--gray-200);border-radius:14px;margin-bottom:14px;box-shadow:var(--shadow);overflow:hidden;}
-.p-header{display:flex;align-items:flex-start;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--gray-100);gap:12px;flex-wrap:wrap;}
-.p-no{font-size:14px;font-weight:700;}
-.p-date{font-size:12px;color:var(--gray-500);margin-top:2px;}
-.p-body{padding:14px 20px;}
-.p-items{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
-.p-item-chip{display:flex;align-items:center;gap:5px;background:var(--gray-50);border-radius:8px;padding:4px 10px;font-size:12.5px;}
-.p-footer{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--gray-100);flex-wrap:wrap;gap:8px;}
-.p-total{font-size:15px;font-weight:700;color:var(--green-dark);}
-.p-count{font-size:12.5px;color:var(--gray-500);margin-bottom:4px;}
-.status-badge{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;}
-.s-menunggu{background:#fef3c7;color:#d97706;}
-.s-diproses{background:#dbeafe;color:#2563eb;}
-.s-dikirim{background:#ede9fe;color:#7c3aed;}
-.s-selesai{background:var(--green-light);color:var(--green-dark);}
-.s-dibatalkan{background:#fee2e2;color:#dc2626;}
-.btn-actions{display:flex;gap:8px;}
-.empty-state{text-align:center;padding:60px 20px;color:var(--gray-500);}
-</style>
+    @vite('resources/css/customer-riwayat.css')
 @endpush
 
 @section('content')
@@ -50,7 +31,14 @@
         <div class="p-count">{{ $pesanan->items->count() }} item</div>
         <div class="p-items">
             @foreach($pesanan->items as $item)
-            <div class="p-item-chip">{{ $item->emoji_produk }} {{ $item->nama_produk }}</div>
+            <div class="p-item-chip">
+                @if($item->gambar_produk)
+                    <img src="{{ asset('storage/' . $item->gambar_produk) }}" alt="{{ $item->nama_produk }}">
+                @else
+                    {{ $item->emoji_produk }}
+                @endif
+                {{ $item->nama_produk }}
+            </div>
             @endforeach
         </div>
         <div class="p-footer">

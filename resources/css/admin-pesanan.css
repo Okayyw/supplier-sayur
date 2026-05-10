@@ -1,0 +1,19 @@
+.status-filter {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+.status-filter a {
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1.5px solid var(--gray-200);
+    color: var(--gray-700);
+    background: #fff;
+    transition: all .15s;
+}
+.status-filter a:hover { border-color: var(--green); color: var(--green-dark); }
+.status-filter a.active { background: var(--gray-900); color: #fff; border-color: var(--gray-900); }

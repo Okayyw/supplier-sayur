@@ -3,35 +3,8 @@
 @section('page-title', 'Detail Pesanan')
 
 @push('styles')
-<style>
-    .detail-grid{display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start;}
-    .d-card{background:#fff;border:1px solid var(--gray-200);border-radius:14px;box-shadow:var(--shadow);margin-bottom:16px;overflow:hidden;}
-    .d-header{padding:16px 20px;border-bottom:1px solid var(--gray-100);display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
-    .d-header h2{font-size:15px;font-weight:700;}
-    .d-header .sub{font-size:12px;color:var(--gray-500);margin-top:2px;}
-    .d-body{padding:18px 20px;}
-    .prod-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--gray-100);}
-    .prod-item:last-child{border-bottom:none;}
-    .prod-emoji{width:48px;height:48px;border-radius:10px;background:var(--green-light);display:grid;place-items:center;font-size:24px;flex-shrink:0;}
-    .prod-info{flex:1;}
-    .prod-info strong{display:block;font-size:13.5px;font-weight:600;}
-    .prod-info span{font-size:12px;color:var(--gray-500);}
-    .prod-price{font-size:13.5px;font-weight:700;}
-    .info-row{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--gray-100);font-size:13.5px;}
-    .info-row:last-child{border-bottom:none;}
-    .info-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
-    .info-content strong{display:block;font-size:12px;color:var(--gray-500);font-weight:600;margin-bottom:2px;}
-    .r-row{display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;color:var(--gray-700);}
-    .r-total{display:flex;justify-content:space-between;font-size:16px;font-weight:700;padding:8px 0;color:var(--green-dark);}
-    .status-badge{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;}
-    .s-menunggu{background:#fef3c7;color:#d97706;}
-    .s-diproses{background:#dbeafe;color:#2563eb;}
-    .s-dikirim{background:#ede9fe;color:#7c3aed;}
-    .s-selesai{background:var(--green-light);color:var(--green-dark);}
-    .s-dibatalkan{background:#fee2e2;color:#dc2626;}
-    @media(max-width:768px){.detail-grid{grid-template-columns:1fr;}}
-    </style>
-    @endpush
+    @vite('resources/css/customer-riwayat-detail.css')
+@endpush
 
     @section('content')
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
@@ -65,7 +38,13 @@
                 <div class="d-body">
                     @foreach($pesanan->items as $item)
                     <div class="prod-item">
-                        <div class="prod-emoji">{{ $item->emoji_produk }}</div>
+                        <div class="prod-emoji">
+                            @if($item->gambar_produk)
+                                <img src="{{ asset('storage/' . $item->gambar_produk) }}" alt="{{ $item->nama_produk }}">
+                            @else
+                                {{ $item->emoji_produk }}
+                            @endif
+                        </div>
                         <div class="prod-info">
                             <strong>{{ $item->nama_produk }}</strong>
                             <span>{{ $item->jumlah }} kg × Rp {{ number_format($item->harga,0,',','.') }}</span>

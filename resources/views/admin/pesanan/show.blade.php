@@ -3,54 +3,7 @@
 @section('page-title', 'Detail Pesanan')
 
 @push('styles')
-<style>
-    .detail-grid {
-        display: grid;
-        grid-template-columns: 1fr 340px;
-        gap: 16px;
-        align-items: start;
-    }
-    .info-row {
-        display: flex;
-        justify-content: space-between;
-        padding: 9px 0;
-        border-bottom: 1px solid var(--gray-100);
-        font-size: 13.5px;
-    }
-    .info-row:last-child { border-bottom: none; }
-    .info-row span:first-child { color: var(--gray-500); }
-    .info-row span:last-child  { font-weight: 600; }
-    .status-select {
-        width: 100%;
-        padding: 9px 12px;
-        border: 1.5px solid var(--gray-200);
-        border-radius: 8px;
-        font-size: 13.5px;
-        font-family: inherit;
-        background: var(--gray-50);
-        outline: none;
-        cursor: pointer;
-        transition: border-color .15s;
-    }
-    .status-select:focus { border-color: var(--green); }
-    .customer-info {
-        background: var(--gray-50);
-        border-radius: 10px;
-        padding: 14px;
-        margin-bottom: 16px;
-    }
-    .customer-info h4 {
-        font-size: 13px;
-        font-weight: 700;
-        color: var(--gray-500);
-        text-transform: uppercase;
-        letter-spacing: .04em;
-        margin-bottom: 10px;
-    }
-    @media (max-width: 768px) {
-        .detail-grid { grid-template-columns: 1fr; }
-    }
-</style>
+    @vite('resources/css/admin-pesanan-show.css')
 @endpush
 
 @section('content')
@@ -108,9 +61,15 @@
                             <tr>
                                 <td>
                                     <div style="display:flex;align-items:center;gap:10px;">
-                                        <span style="font-size:22px;">
-                                            {{ $item->produk ? $item->produk->emoji : '🥬' }}
-                                        </span>
+                                        @if($item->gambar_produk)
+                                            <img src="{{ asset('storage/' . $item->gambar_produk) }}" alt="{{ $item->nama_produk }}" style="width:40px;height:40px;border-radius:6px;object-fit:cover;">
+                                        @elseif($item->produk && $item->produk->gambar)
+                                            <img src="{{ asset('storage/' . $item->produk->gambar) }}" alt="{{ $item->nama_produk }}" style="width:40px;height:40px;border-radius:6px;object-fit:cover;">
+                                        @else
+                                            <span style="font-size:22px;">
+                                                {{ $item->emoji_produk ?: ($item->produk ? $item->produk->emoji : '🥬') }}
+                                            </span>
+                                        @endif
                                         <strong>{{ $item->nama_produk }}</strong>
                                     </div>
                                 </td>

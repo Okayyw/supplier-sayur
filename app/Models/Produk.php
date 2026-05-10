@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Produk extends Model
 {
     protected $fillable = [
-        'nama', 'deskripsi', 'harga', 'stok', 'kategori', 'emoji', 'aktif'
+        'nama', 'deskripsi', 'harga', 'stok', 'kategori', 'emoji', 'gambar', 'aktif'
     ];
  
     protected $casts = [

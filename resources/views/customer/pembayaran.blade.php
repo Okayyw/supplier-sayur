@@ -3,106 +3,7 @@
 @section('page-title', 'Pembayaran')
 
 @push('styles')
-<style>
-    .pay-grid {
-        display: grid;
-        grid-template-columns: 1fr 340px;
-        gap: 20px;
-        align-items: start;
-    }
-    .pay-card {
-        background: #fff;
-        border: 1px solid var(--gray-200);
-        border-radius: 14px;
-        box-shadow: var(--shadow);
-        margin-bottom: 16px;
-    }
-    .pay-card-header {
-        padding: 16px 20px;
-        border-bottom: 1px solid var(--gray-100);
-        display: flex; align-items: center; gap: 10px;
-    }
-    .pay-card-header h2 { font-size: 15px; font-weight: 700; }
-    .pay-card-body { padding: 20px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .form-group { margin-bottom: 14px; }
-    .form-label { display: block; font-size: 12.5px; font-weight: 600; color: var(--gray-700); margin-bottom: 5px; }
-    .form-control {
-        width: 100%; padding: 10px 12px;
-        border: 1.5px solid var(--gray-200); border-radius: 8px;
-        font-size: 13.5px; font-family: inherit;
-        background: var(--gray-50); color: var(--gray-900);
-        outline: none; transition: border-color .15s;
-    }
-    .form-control:focus { border-color: var(--green); background: #fff; }
-    .form-control.is-invalid { border-color: var(--red); }
-    .invalid-feedback { color: var(--red); font-size: 11.5px; margin-top: 4px; }
-
-    /* Metode Pembayaran */
-    .metode-list { display: flex; flex-direction: column; gap: 10px; }
-    .metode-item {
-        display: flex; align-items: center; gap: 14px;
-        padding: 14px 16px;
-        border: 1.5px solid var(--gray-200);
-        border-radius: 10px; cursor: pointer;
-        transition: all .15s; position: relative;
-    }
-    .metode-item:hover { border-color: var(--green); background: var(--green-bg); }
-    .metode-item.selected { border-color: var(--green); background: var(--green-bg); }
-    .metode-item input[type=radio] { display: none; }
-    .metode-icon {
-        width: 40px; height: 40px; border-radius: 10px;
-        display: grid; place-items: center; font-size: 20px;
-        flex-shrink: 0;
-    }
-    .metode-info { flex: 1; }
-    .metode-info strong { display: block; font-size: 13.5px; font-weight: 700; color: var(--gray-900); }
-    .metode-info span { font-size: 12px; color: var(--gray-500); }
-    .metode-check {
-        width: 18px; height: 18px; border-radius: 50%;
-        border: 2px solid var(--gray-300);
-        display: grid; place-items: center;
-        transition: all .15s;
-    }
-    .metode-item.selected .metode-check {
-        background: var(--green); border-color: var(--green);
-    }
-    .metode-item.selected .metode-check::after {
-        content: '✓'; color: #fff; font-size: 10px; font-weight: 700;
-    }
-
-    /* Ringkasan kanan */
-    .ringkasan-item {
-        display: flex; align-items: center; gap: 12px;
-        padding: 10px 0; border-bottom: 1px solid var(--gray-100);
-    }
-    .ringkasan-item:last-child { border-bottom: none; }
-    .ringkasan-emoji {
-        width: 44px; height: 44px; border-radius: 8px;
-        background: var(--green-light); display: grid;
-        place-items: center; font-size: 22px; flex-shrink: 0;
-    }
-    .ringkasan-item-info { flex: 1; }
-    .ringkasan-item-info strong { display: block; font-size: 13px; font-weight: 600; }
-    .ringkasan-item-info span { font-size: 11.5px; color: var(--gray-500); }
-    .ringkasan-price { font-size: 13px; font-weight: 700; }
-    .r-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 13px; color: var(--gray-700); }
-    .r-total { display: flex; justify-content: space-between; font-size: 16px; font-weight: 700; padding: 8px 0; }
-    .r-total span:last-child { color: var(--green-dark); }
-    .btn-bayar {
-        width: 100%; padding: 13px; background: var(--gray-900);
-        color: #fff; border: none; border-radius: 10px;
-        font-size: 14px; font-weight: 700; cursor: pointer;
-        font-family: inherit; margin-top: 14px; transition: background .15s;
-        display: flex; align-items: center; justify-content: center; gap: 8px;
-    }
-    .btn-bayar:hover { background: #1f2937; }
-    .btn-bayar:disabled { background: var(--gray-400); cursor: not-allowed; }
-    @media (max-width: 768px) {
-        .pay-grid { grid-template-columns: 1fr; }
-        .form-row { grid-template-columns: 1fr; }
-    }
-</style>
+    @vite('resources/css/customer-pembayaran.css')
 @endpush
 
 @section('content')
@@ -198,17 +99,7 @@
                             <span>VA BCA, Mandiri, BNI</span>
                         </div>
                         <div class="metode-check"></div>
-                    </label>
-
-                    <label class="metode-item {{ old('metode') == 'transfer_bank' ? 'selected' : '' }}" onclick="pilihMetode(this,'transfer_bank')">
-                        <input type="radio" name="metode" value="transfer_bank" {{ old('metode') == 'transfer_bank' ? 'checked' : '' }}>
-                        <div class="metode-icon" style="background:#ede9fe;">🏧</div>
-                        <div class="metode-info">
-                            <strong>Transfer Bank</strong>
-                            <span>BCA, Mandiri, BNI, BRI</span>
-                        </div>
-                        <div class="metode-check"></div>
-                    </label>
+                    </label>    
                 </div>
             </div>
         </div>
@@ -225,7 +116,13 @@
                 <!-- Item list -->
                 @foreach($keranjangs as $item)
                 <div class="ringkasan-item">
-                    <div class="ringkasan-emoji">{{ $item->produk->emoji }}</div>
+                    <div class="ringkasan-emoji">
+                        @if($item->produk->gambar)
+                            <img src="{{ asset('storage/' . $item->produk->gambar) }}" alt="{{ $item->produk->nama }}">
+                        @else
+                            {{ $item->produk->emoji }}
+                        @endif
+                    </div>
                     <div class="ringkasan-item-info">
                         <strong>{{ $item->produk->nama }}</strong>
                         <span>{{ $item->jumlah }} kg × Rp {{ number_format($item->produk->harga,0,',','.') }}</span>

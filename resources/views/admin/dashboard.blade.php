@@ -3,41 +3,7 @@
 @section('page-title', 'Dashboard')
 
 @push('styles')
-<style>
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-        gap: 14px;
-        margin-bottom: 24px;
-    }
-    .stat-card {
-        background: #fff;
-        border: 1px solid var(--gray-200);
-        border-radius: 12px;
-        padding: 18px;
-        box-shadow: var(--shadow);
-    }
-    .stat-card-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 10px;
-    }
-    .stat-card-label { font-size: 12px; color: var(--gray-500); font-weight: 600; }
-    .stat-icon {
-        width: 36px; height: 36px;
-        border-radius: 9px;
-        display: grid;
-        place-items: center;
-        font-size: 18px;
-    }
-    .stat-val { font-size: 24px; font-weight: 800; color: var(--gray-900); }
-    .stat-val-sm { font-size: 16px; font-weight: 700; color: var(--gray-900); }
-    .icon-green  { background: var(--green-light); }
-    .icon-blue   { background: #dbeafe; }
-    .icon-yellow { background: #fef3c7; }
-    .icon-purple { background: #ede9fe; }
-</style>
+    @vite('resources/css/admin-dashboard.css')
 @endpush
 
 @section('content')

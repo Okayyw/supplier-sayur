@@ -6,6 +6,7 @@ use App\Models\Produk;
 use App\Models\User;
 use App\Models\Pesanan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -38,16 +39,22 @@ class AdminController extends Controller
 
     public function produkStore(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'nama'      => 'required|string|max:255',
             'harga'     => 'required|integer|min:0',
             'stok'      => 'required|integer|min:0',
             'kategori'  => 'required|in:Buah,Daun,Umbi,Kembang,Bumbu,Biji',
             'emoji'     => 'required|string',
+            'gambar'    => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'deskripsi' => 'nullable|string',
         ]);
 
-        Produk::create($request->all());
+        if ($request->hasFile('gambar')) {
+            $path = $request->file('gambar')->store('produk', 'public');
+            $data['gambar'] = $path;
+        }
+
+        Produk::create($data);
         return redirect()->route('admin.produk')->with('success', 'Produk berhasil ditambahkan.');
     }
 
@@ -59,21 +66,34 @@ class AdminController extends Controller
 
     public function produkUpdate(Request $request, Produk $produk)
     {
-        $request->validate([
+        $data = $request->validate([
             'nama'      => 'required|string|max:255',
             'harga'     => 'required|integer|min:0',
             'stok'      => 'required|integer|min:0',
             'kategori'  => 'required|in:Buah,Daun,Umbi,Kembang,Bumbu,Biji',
             'emoji'     => 'required|string',
+            'gambar'    => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'deskripsi' => 'nullable|string',
         ]);
 
-        $produk->update($request->all());
+        if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
+            if ($produk->gambar) {
+                Storage::disk('public')->delete($produk->gambar);
+            }
+            $path = $request->file('gambar')->store('produk', 'public');
+            $data['gambar'] = $path;
+        }
+
+        $produk->update($data);
         return redirect()->route('admin.produk')->with('success', 'Produk berhasil diperbarui.');
     }
 
     public function produkDestroy(Produk $produk)
     {
+        if ($produk->gambar) {
+            Storage::disk('public')->delete($produk->gambar);
+        }
         $produk->delete();
         return back()->with('success', 'Produk berhasil dihapus.');
     }

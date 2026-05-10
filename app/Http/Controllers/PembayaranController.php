@@ -81,13 +81,14 @@ class PembayaranController extends Controller
 
         foreach ($keranjangs as $item) {
             PesananItem::create([
-                'pesanan_id'  => $pesanan->id,
-                'produk_id'   => $item->produk_id,
-                'nama_produk' => $item->produk->nama,
-                'emoji_produk'=> $item->produk->emoji,
-                'harga'       => $item->produk->harga,
-                'jumlah'      => $item->jumlah,
-                'subtotal'    => $item->subtotal,
+                'pesanan_id'    => $pesanan->id,
+                'produk_id'     => $item->produk_id,
+                'nama_produk'   => $item->produk->nama,
+                'emoji_produk'  => $item->produk->emoji,
+                'gambar_produk' => $item->produk->gambar,
+                'harga'         => $item->produk->harga,
+                'jumlah'        => $item->jumlah,
+                'subtotal'      => $item->subtotal,
             ]);
             $item->produk->decrement('stok', $item->jumlah);
         }

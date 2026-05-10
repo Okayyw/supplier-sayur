@@ -29,7 +29,11 @@
                     <tr>
                         <td>
                             <div style="display:flex;align-items:center;gap:10px;">
-                                <span style="font-size:24px;">{{ $produk->emoji }}</span>
+                                @if($produk->gambar)
+                                    <img src="{{ asset('storage/' . $produk->gambar) }}" alt="{{ $produk->nama }}" style="width:40px;height:40px;border-radius:6px;object-fit:cover;">
+                                @else
+                                    <span style="font-size:24px;">{{ $produk->emoji }}</span>
+                                @endif
                                 <div>
                                     <div style="font-weight:600;">{{ $produk->nama }}</div>
                                     <div style="font-size:11.5px;color:var(--gray-500);">{{ $produk->deskripsi }}</div>
